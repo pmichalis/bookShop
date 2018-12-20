@@ -14,11 +14,9 @@ describe('Order tests', () => {
         ReactDOM.render(<Order />, div);
         ReactDOM.unmountComponentAtNode(div);
     })
-
-    it('Zamowienie renders', () => {
+    it('Snapshot matches', () => {
         const wrapper = shallow(<Order/>);
-        // console.log(wrapper.debug());
-        expect(wrapper.find('div').text()).toBe('Zamowienie');
+        expect(wrapper).toMatchSnapshot();
     })
 
 })

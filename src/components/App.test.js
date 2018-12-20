@@ -13,7 +13,10 @@ describe('App test', () => {
         ReactDOM.render(<App />, div);
         ReactDOM.unmountComponentAtNode(div);
     })
-
+    it('Snapshot matches', () => {
+        const wrapper = shallow(<App/>);
+        expect(wrapper).toMatchSnapshot();
+    })
     it('chaild component renders', () => {
         const wrapper = shallow(<App/>);
         //console.log(wrapper.debug());

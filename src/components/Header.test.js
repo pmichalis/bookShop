@@ -24,7 +24,10 @@ describe('Header tests', () => {
         });
         expect(wrapper.find('h1').text()).toBe('White Books');
     })
-
+    it('Snapshot matches', () => {
+        const wrapper = shallow(<Header/>);
+        expect(wrapper).toMatchSnapshot();
+    })
     it ('Header state changes after clicking on header div', () => {
         const wrapper = shallow(<Header/>);
         expect(wrapper.state().bookstoreName).toBe('Black Books');
