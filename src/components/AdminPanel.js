@@ -2,31 +2,41 @@ import React from 'react';
 
 class AdminPanel extends React.Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            book : {
-                name : "",
-                author : "",
-                description : "",
-                onStock : true,
-                image : ""
+            book: {
+                name: "",
+                author: "",
+                description: "",
+                onStock: true,
+                image: ""
             }
         };
-        
     };
 
     handleChange = (event) => {
-        
-        const newBook = {
-            ...this.state.book,
-            [event.target.name] : event.target.value
+
+        let newBook;
+
+        if(event.target.name==="onStock") {
+            newBook = {
+                ...this.state.book,
+                [event.target.name]: event.target.checked
+            };
+        } else {
+            newBook = {
+                ...this.state.book,
+                [event.target.name]: event.target.value
+            };
         }
 
         this.setState({
-           book: newBook
-        })
+            book: newBook
+        });
     }
+
+
     render() {
         return (
             <div className="adminpanel col-md-4" >
@@ -36,7 +46,7 @@ class AdminPanel extends React.Component {
                        onChange={this.handleChange} value={this.state.book.name}/>
                     </div>
                     <div className="form-group">
-                        <input type="text" placeholder="Book author" id="autor" name="autor" className="form-control"
+                        <input type="text" placeholder="Book author" id="author" name="author" className="form-control"
                         onChange={this.handleChange} value={this.state.book.author}/>
                     </div>
                     <div className="form-group">
