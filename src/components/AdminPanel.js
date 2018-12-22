@@ -11,7 +11,8 @@ class AdminPanel extends React.Component {
                 description: "",
                 onStock: true,
                 image: ""
-            }
+            },
+            books : []
         };
     };
 
@@ -36,11 +37,33 @@ class AdminPanel extends React.Component {
         });
     }
 
+    addNewBook = (event) => {
+
+        event.preventDefault();
+
+        let newBooks = [...this.state.books];
+
+        let newBook = { ...this.state.book };
+
+        newBooks.push(newBook);
+
+        this.setState({
+            books : newBooks,
+            book : {
+                name: "",
+                author: "",
+                description: "",
+                onStock: true,
+                image: ""
+            }
+        });
+
+    }
 
     render() {
         return (
             <div className="adminpanel col-md-4" >
-                <form>
+                <form onSubmit={this.addNewBook}>
                     <div className="form-group">
                         <input type="text" placeholder="Book name" id="name" name="name" className="form-control" 
                        onChange={this.handleChange} value={this.state.book.name}/>
