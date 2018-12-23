@@ -7,22 +7,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.bookView{
-  border:2px solid black;
-  border-radius: 5px;
-  margin: 5px;
-  padding: 5px;
+
+.app {
+  background-color:aqua;
+}
+
+.header{
+  background-color:black;
+  color:white; 
+}
+
+.order{
+  background-color:darkgray;
+}
+.inventory{
+  background-color:rgb(112, 128, 105);
 }
 .adminpanel{
   background-color:black;
   padding:10px;
-}
-.orderView{
-  border-bottom:2px solid black;
-  margin:5px
-}
-.gotoadmin{
-  position: absolute;
-  right: 20px;
-  top: 10px;
 }
