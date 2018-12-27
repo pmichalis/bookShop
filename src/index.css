@@ -7,23 +7,40 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-.app {
-  background-color:aqua;
+.adminPanel{
+    width: 200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: -webkit-fill-available;
 }
-
-.header{
-  background-color:black;
-  color:white; 
+.adminLogginButtons{
+  display: flex;
+  flex-wrap: inherit;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
 }
-
-.order{
-  background-color:darkgray;
+.form-control{
+  margin: 10px 0px;
 }
-.inventory{
-  background-color:rgb(112, 128, 105);
+.bookView{
+  border:2px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
 }
 .adminpanel{
   background-color:black;
   padding:10px;
+}
+.orderView{
+  border-bottom:2px solid black;
+  margin:5px
+}
+.gotoadmin{
+  position: absolute;
+  right: 20px;
+  top: 10px;
 }
