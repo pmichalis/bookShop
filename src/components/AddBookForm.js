@@ -1,5 +1,5 @@
 import React from 'react';
-import {fbase} from '../fbase';
+import {fbase , firebaseApp} from '../fbase';
 
 class AddBookForm extends React.Component {
     constructor(){
@@ -75,8 +75,8 @@ class AddBookForm extends React.Component {
                         </div>
                         <button type="submit" className="btn btn-primary">Add</button>
                     </form>
-                </div>
-
+                    <a href={firebaseApp.auth().signOut()} className="btn btn-danger loggin">Log Out</a>
+                </div> 
         )
     }
 }
