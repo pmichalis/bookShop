@@ -1,11 +1,10 @@
 import React from 'react';
-import {fbase , firebaseApp} from '../fbase';
+import {firebaseApp} from '../fbase';
 
 class AddBookForm extends React.Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            books : [],
             book: {
                 name: "",
                 author: "",
@@ -13,8 +12,25 @@ class AddBookForm extends React.Component {
                 onStock: true,
                 image: ""
             }
+        };
+    }
+
+    handleChange = (event) => {
+        let newBook;
+        if(event.target.name==="onStock") {
+            newBook = {
+                ...this.state.book,
+                [event.target.name]: event.target.checked
+            };
+        } else {
+            newBook = {
+                ...this.state.book,
+                [event.target.name]: event.target.value
+            };
         }
-        
+        this.setState({
+            book: newBook
+        });
     }
 
     addNewBook = (event) => {
@@ -23,8 +39,9 @@ class AddBookForm extends React.Component {
 
         let newBook = { ...this.state.book };
 
+        this.props.addNewBook(newBook);
+
         this.setState({
-            books : [...this.state.books, newBook],
             book : {
                 name: "",
                 author: "",
@@ -35,17 +52,6 @@ class AddBookForm extends React.Component {
         });
     }
 
-    
-    componentDidMount() {
-        this.ref = fbase.syncState('bookstore/books',{
-            context: this,
-            state: 'books'
-        });
-   }
-
-   componentWillUnmount() {
-       fbase.removeBinding(this.ref);
-   }
 
 
     render(){
