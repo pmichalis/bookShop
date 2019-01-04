@@ -1,24 +1,22 @@
 import React from 'react';
+import AdminBookView from './AdminBookView'
 
 class AdminBookListing extends React.Component {
 
-    constructor() {
-        super();
-        this.setState = {
-            books : [],
-        }
-   
-    }
 
     render() {
 
-        let list;
+        let list = <div>No books in state</div>;
 
-       if(this.props.books){
-            list = <ol>{this.props.books.map((book) => <li key= {book.name}>{book.name}  {book.author}</li>)}</ol>
-       } else {
-            list = <div>No Books in base</div>
-       }
+        if(this.props.books && Array.isArray(this.props.books)) {
+            list = this.props.books.map((book) => {
+                return (<AdminBookView  
+                            book={book} 
+                            removeFromInventory={this.props.removeFromInventory} 
+                        />)
+            });
+        } 
+
        return (
            <div>
             {list}

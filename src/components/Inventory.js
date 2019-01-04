@@ -6,9 +6,7 @@ class Inventory extends React.Component {
     
     constructor(){
         super();
-        this.state = {
-            books : []
-        }
+        this.state = {}
     }
     componentDidMount() {
         this.ref = fbase.syncState('bookstore/books',{
@@ -23,8 +21,11 @@ class Inventory extends React.Component {
     
     render() {
 
-        const bookListing = this.state.books.map( book => {
-            return <BookView book={book} addToOrder={this.props.addToOrder}/>
+        let bookListing = <h3>No books on firebase!</h3>
+
+        if(Array.isArray(this.state.books))
+            bookListing = this.state.books.map( book => {
+                return <BookView book={book} addToOrder={this.props.addToOrder}/>
         });
 
 
