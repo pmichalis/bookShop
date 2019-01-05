@@ -10,7 +10,9 @@ class AdminPanel extends React.Component {
     constructor() {
         super();
         this.state = {
-            loggedIn : false
+            loggedIn : false,
+            editMode : false,
+            bookToEdit : {}
         };
     };
 
@@ -45,6 +47,13 @@ class AdminPanel extends React.Component {
         books: this.state.books.filter( book => title!==book.name )
     })
 }
+
+editBook = (bookToEdit) => {
+    this.setState({
+        editMode : true,
+        bookToEdit : bookToEdit
+    });
+}
     render() {
 
         return (
@@ -54,8 +63,17 @@ class AdminPanel extends React.Component {
             }
             {this.state.loggedIn && 
                 <React.Fragment>
-                    <AddBookForm addNewBook={this.addNewBook}/>
-                    <AdminBookListing books={this.state.books} removeFromInventory = {this.removeFromInventory}/>
+                    <AddBookForm 
+                    addNewBook = {this.addNewBook} 
+                    editMode = {this.state.editMode}
+                    book = {this.state.bookToEdit}
+                    />
+                    <AdminBookListing 
+                    books = {this.state.books} 
+                    removeFromInventory = {this.removeFromInventory}
+                    editBook = {this.editBook}
+                    />
+                    
                 </React.Fragment>
             }
             </div>

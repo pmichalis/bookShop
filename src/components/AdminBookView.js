@@ -6,10 +6,13 @@ export default class AdminBookView extends React.Component {
         return (
             <div className="orderView row">
             <div className="col-xs-8">
-                <span>{this.props.book.name} {this.props.book.author}</span>
+                <span>{this.props.book.name} | {this.props.book.author}</span>
             </div>
-            <div className="col-xs-4">
-                <button className="btn btn-primary" onClick={ (event) => this.props.removeFromInventory(this.props.book.name)}>Remove</button>
+            <div className="col-xs-2">
+                <button className="btn btn-primary" onClick={ (event) => this.props.editBook(this.props.book)}>Edit Item</button>
+            </div>
+            <div className="col-xs-2">
+                <button className="btn btn-primary" onClick={ (event) => this.props.removeFromInventory(this.props.book.name)}>Remove from firebase</button>
             </div>
             </div>
                 
