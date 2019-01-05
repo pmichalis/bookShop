@@ -18,18 +18,10 @@ class AdminPanel extends React.Component {
 
     changeLoggedIn = (newValue) => this.setState({loggedIn: newValue}) 
 
-    addNewBook = (book) => {
-        if (Array.isArray(this.state.books)) {
-            this.setState({
-                books : [...this.state.books, book],
-            })
-        } else {
-            this.setState({
-                books : [book],
-            })
-
-        }
-    }
+    addNewBook = (book) => this.setState({
+        book : [...this.state.books, book],
+        editMode : false,
+    })
 
     componentDidMount() {
         this.ref = fbase.syncState('bookstore/books',{
@@ -42,18 +34,28 @@ class AdminPanel extends React.Component {
        fbase.removeBinding(this.ref);
    }
 
+
    removeFromInventory = (title) => {
     this.setState({
         books: this.state.books.filter( book => title!==book.name )
     })
 }
 
-editBook = (bookToEdit) => {
+sendBookToEdit = (bookToEdit) => {
     this.setState({
         editMode : true,
         bookToEdit : bookToEdit
     });
 }
+
+    editBook = (oldBookTitle, bookAfterEdit) => {
+        const newBooks = this.state.books.filter( book => oldBookTitle!==book.name );
+
+        this.setState({
+            books : [...newBooks, bookAfterEdit],
+            editMode : false,
+        })
+    }
     render() {
 
         return (
@@ -67,11 +69,12 @@ editBook = (bookToEdit) => {
                     addNewBook = {this.addNewBook} 
                     editMode = {this.state.editMode}
                     book = {this.state.bookToEdit}
+                    editBook = {this.editBook}
                     />
                     <AdminBookListing 
                     books = {this.state.books} 
                     removeFromInventory = {this.removeFromInventory}
-                    editBook = {this.editBook}
+                    sendBookToEdit = {this.sendBookToEdit}
                     />
                     
                 </React.Fragment>

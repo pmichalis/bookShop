@@ -30,14 +30,25 @@ class AddBookForm extends React.Component {
 
     addNewBook = (event) => {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        let newBook = { ...this.state.book };
+        if(!this.props.editMode) {
 
-        this.props.addNewBook(newBook);
+            const newBook = { ...this.state.book };
+    
+            this.props.addNewBook(newBook);
+    
+            this.setState({book : {}});
+        } else {
+            const newBook = {
+                ...this.props.book,
+                ...this.state.book
+            }
 
-        this.setState({book : {}});
+            this.props.editBook(this.props.book.name, newBook);
 
+            this.setState({book : {}});
+        }
     }
 
     render(){

@@ -13,7 +13,7 @@ class AdminBookListing extends React.Component {
                 <AdminBookView  
                             book={book} 
                             removeFromInventory={this.props.removeFromInventory} 
-                            editBook = {this.props.editBook}
+                            sendBookToEdit = {this.props.sendBookToEdit}
                 />
                 );
         } 
