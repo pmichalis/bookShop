@@ -25,7 +25,7 @@ class AdminPanel extends React.Component {
     changeLoggedIn = (newValue) => this.setState({loggedIn: newValue}) 
 
     addNewBook = (book) => this.setState({
-        book : [...this.state.books, book],
+        books : [...this.state.books, book],
         editMode : false,
     })
 
