@@ -6,7 +6,13 @@ class AddBookForm extends React.Component {
     constructor(){
         super()
         this.state = {
-            book: {}
+            book : {
+                    name : "",
+                    author : "",
+                    description : "",
+                    onStock : "",
+                    image : "",
+            }
         }
     }
 
@@ -38,17 +44,30 @@ class AddBookForm extends React.Component {
     
             this.props.addNewBook(newBook);
     
-            this.setState({book : {}});
+            this.setState({book: {
+                    name : "",
+                    author : "",
+                    description : "",
+                    onStock : "",
+                    image : "",
+            }});
         } else {
             const newBook = {
                 ...this.props.book,
                 ...this.state.book
             }
-
+            
             this.props.editBook(this.props.book.name, newBook);
 
-            this.setState({book : {}});
+            this.setState({ book: {
+                    name : "",
+                    author : "",
+                    description : "",
+                    onStock : "",
+                    image : "",
+            }});
         }
+        event.target.reset();
     }
 
     render(){
@@ -79,6 +98,7 @@ class AddBookForm extends React.Component {
                             <input type="text" placeholder="Book image" id="image" name="image" className="form-control"
                                 onChange={this.handleChange} value={this.state.book.image} />
                         </div>
+                        
                         <button type="submit" className="btn btn-primary">{label}</button>
                     </form>
                     <a href={firebaseApp.auth().signOut()} className="btn btn-danger loggin">Log Out</a>

@@ -12,7 +12,13 @@ class AdminPanel extends React.Component {
         this.state = {
             loggedIn : false,
             editMode : false,
-            bookToEdit : {}
+            bookToEdit : {
+                name : "",
+                author : "",
+                description : "",
+                onStock : "",
+                image : "",
+            }
         };
     };
 
@@ -54,6 +60,13 @@ sendBookToEdit = (bookToEdit) => {
         this.setState({
             books : [...newBooks, bookAfterEdit],
             editMode : false,
+            bookToEdit : {
+                name : "",
+                author : "",
+                description : "",
+                onStock : "",
+                image : "",
+            }
         })
     }
     render() {
