@@ -16,8 +16,9 @@ class AdminPanel extends React.Component {
                 name : "",
                 author : "",
                 description : "",
-                onStock : "",
+                onStock : true,
                 image : "",
+                price : ""
             }
         };
     };
@@ -64,8 +65,9 @@ sendBookToEdit = (bookToEdit) => {
                 name : "",
                 author : "",
                 description : "",
-                onStock : "",
+                onStock : true,
                 image : "",
+                price : ""
             }
         })
     }

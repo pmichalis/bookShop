@@ -10,8 +10,9 @@ class AddBookForm extends React.Component {
                     name : "",
                     author : "",
                     description : "",
-                    onStock : "",
+                    onStock : true,
                     image : "",
+                    price : ""
             }
         }
     }
@@ -48,8 +49,9 @@ class AddBookForm extends React.Component {
                     name : "",
                     author : "",
                     description : "",
-                    onStock : "",
+                    onStock : true,
                     image : "",
+                    price : ""
             }});
         } else {
             const newBook = {
@@ -63,8 +65,9 @@ class AddBookForm extends React.Component {
                     name : "",
                     author : "",
                     description : "",
-                    onStock : "",
+                    onStock : true,
                     image : "",
+                    price : ""
             }});
         }
         event.target.reset();
@@ -97,6 +100,10 @@ class AddBookForm extends React.Component {
                         <div className="form-group">
                             <input type="text" placeholder="Book image" id="image" name="image" className="form-control"
                                 onChange={this.handleChange} value={this.state.book.image} />
+                        </div>
+                        <div className="form-group">
+                            <input type="number" min="0.00" max="10000.00" step="0.01" placeholder="Book price" id="price" name="price" className="form-control"
+                                onChange={this.handleChange} value={this.state.book.price} />
                         </div>
                         
                         <button type="submit" className="btn btn-primary">{label}</button>
