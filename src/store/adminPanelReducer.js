@@ -1,6 +1,9 @@
 
 const initialState = {
-    book : {}
+    book : {
+        name : "Book name from store",
+        author : "author from store"
+    }
 }
 
 const adminPanelReducer = (state = initialState, action) => {
