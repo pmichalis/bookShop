@@ -109,6 +109,7 @@ class AddBookForm extends React.Component {
                         <button type="submit" className="btn btn-primary">{label}</button>
                     </form>
                     <a href={firebaseApp.auth().signOut()} className="btn btn-danger loggin">Log Out</a>
+                    <a href="javascript:history.back();" className="btn btn-danger loggin">Back</a>
                 </div> 
         )
     }
