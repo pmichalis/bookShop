@@ -1,7 +1,8 @@
 import React from 'react';
 import {firebaseApp} from '../fbase';
+import {connect} from 'react-redux';
 
-class AddBookForm extends React.Component {
+class AddBook extends React.Component {
 
     constructor(){
         super()
@@ -82,28 +83,28 @@ class AddBookForm extends React.Component {
                     <form onSubmit={this.addNewBook}>
                         <div className="form-group">
                             <input type="text" placeholder="Book name" id="name" name="name" className="form-control"
-                                onChange={this.handleChange} value={this.state.book.name || this.props.book.name} />
+                                onChange={this.handleChange} value={this.props.book.name} />
                         </div>
                         <div className="form-group">
                             <input type="text" placeholder="Book author" id="author" name="author" className="form-control"
-                                onChange={this.handleChange} value={this.state.book.author || this.props.book.author} />
+                                onChange={this.handleChange} value={this.props.book.author} />
                         </div>
                         <div className="form-group">
                             <textarea placeholder="Book description" id="description" name="description" className="form-control"
-                                onChange={this.handleChange} value={this.state.book.description || this.props.book.description} />
+                                onChange={this.handleChange} value={this.props.book.description} />
                         </div>
                         <div className="form-group">
                             <input type="checkbox" id="onStock" name="onStock" className="form-check-input"
-                                onChange={this.handleChange} value={this.state.book.onStock || this.props.book.name} />
+                                onChange={this.handleChange} value={this.props.book.onStock} />
                             <label htmlFor="onStock" className="form-check-label">On stock</label>
                         </div>
                         <div className="form-group">
                             <input type="text" placeholder="Book image" id="image" name="image" className="form-control"
-                                onChange={this.handleChange} value={this.state.book.image} />
+                                onChange={this.handleChange} value={this.props.book.image} />
                         </div>
                         <div className="form-group">
                             <input type="number" min="0.00" max="10000.00" step="0.01" placeholder="Book price" id="price" name="price" className="form-control"
-                                onChange={this.handleChange} value={this.state.book.price} />
+                                onChange={this.handleChange} value={this.props.book.price} />
                         </div>
                         
                         <button type="submit" className="btn btn-primary">{label}</button>
@@ -114,4 +115,13 @@ class AddBookForm extends React.Component {
         )
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        book : state.book
+    }
+}
+
+const AddBookForm = connect(mapStateToProps)(AddBook)
+
 export default AddBookForm;
