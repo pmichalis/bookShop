@@ -1,26 +1,38 @@
 import React from 'react';
-export default class AdminBookView extends React.Component {
+import {connect} from 'react-redux';
+import {sendBookToEditAction} from '../store/actions';
 
+class BookView extends React.Component {
 
     render() {
         return (
             <div className="orderView row">
-            <div className="col-xs-8">
-                <span>
-                    Book name: {this.props.book.name} <br/> 
-                    Book author: {this.props.book.author} <br/> 
-                    Book price: {this.props.book.price}
-                </span>
-            </div>
-            <div className="col-xs-2">
-                <button className="btn btn-primary" onClick={ (event) => this.props.sendBookToEdit(this.props.book)}>Edit Item</button>
-            </div>
-            <div className="col-xs-2">
-                <button className="btn btn-primary" onClick={ (event) => this.props.removeFromInventory(this.props.book.name)}>Remove from firebase</button>
-            </div>
+                <div className="col-xs-8">
+                    <span>{this.props.book.name} | {this.props.book.author} | [<strong>{this.props.book.price} zł</strong>]</span>
+                </div>
+                <div className="col-xs-2">
+                    <button className="btn btn-danger" onClick={ (event) => this.props.sendBookToEdit(this.props.book)}>Edit</button>
+                </div>
+                <div className="col-xs-2">
+                    <button className="btn btn-danger" onClick={ (event) => this.props.removeFromInventory(this.props.book.name)}>Remove</button>
+                </div>
+                
             </div>
                 
         );
     }
-    
+
 }
+
+const mapStateToProps = (state) => {
+    return {}
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        sendBookToEdit : (book) => dispatch(sendBookToEditAction(book))
+    }
+}
+
+const AdminBookView = connect(mapStateToProps,mapDispatchToProps)(BookView);
+
+export default AdminBookView

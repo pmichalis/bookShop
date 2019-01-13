@@ -1,78 +1,70 @@
 import React from 'react';
 import {firebaseApp} from '../fbase';
 import {connect} from 'react-redux';
+import {updateBookAction} from '../store/actions';
 
 class AddBook extends React.Component {
 
-    constructor(){
-        super()
-        this.state = {
-            book : {
-                    name : "",
-                    author : "",
-                    description : "",
-                    onStock : true,
-                    image : "",
-                    price : ""
-            }
-        }
-    }
-
     handleChange = (event) => {
+
         let newBook;
-        if(event.target.name==="onStock") {
+
+        if (event.target.name === "onStock") {
             newBook = {
-                ...this.state.book,
+                ...this.props.book,
                 [event.target.name]: event.target.checked
             };
         } else {
             newBook = {
-                ...this.state.book,
+                ...this.props.book,
                 [event.target.name]: event.target.value
             };
         }
-        this.setState({
-            book: newBook
-        });
+
+        this.props.updateBook(newBook);
     }
 
     addNewBook = (event) => {
 
-            event.preventDefault();
+        event.preventDefault();
 
-        if(!this.props.editMode) {
+        if (!this.props.editMode) {
 
-            const newBook = { ...this.state.book };
-    
+            const newBook = { ...this.props.book };
+
             this.props.addNewBook(newBook);
-    
-            this.setState({book: {
-                    name : "",
-                    author : "",
-                    description : "",
-                    onStock : true,
-                    image : "",
-                    price : ""
-            }});
-        } else {
-            const newBook = {
-                ...this.props.book,
-                ...this.state.book
-            }
-            
-            this.props.editBook(this.props.book.name, newBook);
 
-            this.setState({ book: {
-                    name : "",
-                    author : "",
-                    description : "",
-                    onStock : true,
-                    image : "",
-                    price : ""
-            }});
+            this.props.updateBook({
+                   book: {
+                    name: "",
+                    author: "",
+                    description: "",
+                    onStock: true,
+                    image: "",
+                    price: ""
+                   }
+            });
+
+        } else {
+            
+            const newBook = { ...this.props.book };
+
+            this.props.editBook(this.props.titleOfBookForRemoval, newBook);
+
+            this.props.updateBook({
+                        name: "",
+                        author: "",
+                        description: "",
+                        onStock: true,
+                        image: "",
+                        price: ""
+             });
         }
+
         event.target.reset();
+
     }
+
 
     render(){
 
@@ -116,12 +108,20 @@ class AddBook extends React.Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapDispatchToProps = dispatch => {
     return {
-        book : state.book
+        updateBook : book => dispatch(updateBookAction(book))
     }
 }
 
-const AddBookForm = connect(mapStateToProps)(AddBook)
+const mapStateToProps = state => {
+    return {
+        book : state.book,
+        editMode : state.editBook,
+        titleOfBookForRemoval : state.titleOfBookForRemoval
+    }
+}
+
+const AddBookForm = connect(mapStateToProps,mapDispatchToProps)(AddBook)
 
 export default AddBookForm;

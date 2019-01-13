@@ -11,15 +11,6 @@ class AdminPanel extends React.Component {
         super();
         this.state = {
             loggedIn : false,
-            editMode : false,
-            bookToEdit : {
-                name : "",
-                author : "",
-                description : "",
-                onStock : true,
-                image : "",
-                price : ""
-            }
         };
     };
 
@@ -27,7 +18,6 @@ class AdminPanel extends React.Component {
 
     addNewBook = (book) => this.setState({
         books : [...this.state.books, book],
-        editMode : false,
     })
 
     componentDidMount() {
@@ -46,29 +36,13 @@ class AdminPanel extends React.Component {
     this.setState({
         books: this.state.books.filter( book => title!==book.name )
     })
-}
-
-sendBookToEdit = (bookToEdit) => {
-    this.setState({
-        editMode : true,
-        bookToEdit : bookToEdit
-    });
-}
+   }
 
     editBook = (oldBookTitle, bookAfterEdit) => {
         const newBooks = this.state.books.filter( book => oldBookTitle!==book.name );
 
         this.setState({
             books : [...newBooks, bookAfterEdit],
-            editMode : false,
-            bookToEdit : {
-                name : "",
-                author : "",
-                description : "",
-                onStock : true,
-                image : "",
-                price : ""
-            }
         })
     }
     render() {
@@ -82,14 +56,11 @@ sendBookToEdit = (bookToEdit) => {
                 <React.Fragment>
                     <AddBookForm 
                     addNewBook = {this.addNewBook} 
-                    editMode = {this.state.editMode}
-                    book = {this.state.bookToEdit}
                     editBook = {this.editBook}
                     />
                     <AdminBookListing 
                     books = {this.state.books} 
                     removeFromInventory = {this.removeFromInventory}
-                    sendBookToEdit = {this.sendBookToEdit}
                     />
                     
                 </React.Fragment>
